@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestros Servicios</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Imagenes/medical-5459630_1280-fotor-20231220144025.png" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <h1>Nuestros Servicios</h1>
+        <input type="text" id="search" placeholder="Buscar...">
+    </header>
+    
+    <section id="menu" class="container">
+        <!-- Aquí se cargarán dinámicamente los platos -->
+    </section>
+
+    <section id="servicios" class="section">
+        <div class="container">
+            <div class="servicios-item">
+                <div class="servicio">
+                    <img src="Imagenes/medicine-2361046_1280.jpg" alt="Atención Primaria">
+                    <h3>Atención Primaria</h3>
+                    <p class="descripcion-completa">Atención médica preventiva y curativa para tu bienestar.</p>
+                    <button class="leer-mas">Leer más</button>
+                </div>
+                <div class="servicio">
+                    <img src="Imagenes/doctor-563428_1280.jpg" alt="Especialidades Médicas">
+                    <h3>Especialidades Médicas</h3>
+                    <p class="descripcion-completa">Servicios especializados en varias áreas de la salud.</p>
+                    <button class="leer-mas">Leer más</button>
+                </div>
+                <div class="servicio">
+                    <img src="Imagenes/office-2820890_1280.jpg" alt="Rehabilitación y Fisioterapia">
+                    <h3>Rehabilitación y Fisioterapia</h3>
+                    <p class="descripcion-completa">Recuperación de lesiones y mejora de calidad de vida.</p>
+                    <button class="leer-mas">Leer más</button>
+                </div>
+                <div class="servicio">
+                    <img src="Imagenes/right-4703934_1280.jpg" alt="Telemedicina">
+                    <h3>Telemedicina</h3>
+                    <p class="descripcion-completa">Consultas médicas a distancia desde tu hogar.</p>
+                    <button class="leer-mas">Leer más</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+
+    <Script>
+      document.addEventListener('DOMContentLoaded', function() {
+          const botonesLeerMas = document.querySelectorAll('.servicio .leer-mas');
+      
+          botonesLeerMas.forEach(boton => {
+              boton.addEventListener('click', function() {
+                  const servicio = this.closest('.servicio');
+                  const descripcionCompleta = servicio.querySelector('.descripcion-completa');
+                  descripcionCompleta.classList.toggle('show');
+                  if (descripcionCompleta.classList.contains('show')) {
+                      this.textContent = 'Cerrar';
+                  } else {
+                      this.textContent = 'Leer más';
+                  }
+              });
+          });
+      });
+      
+      
+      </Script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const servicios = document.querySelectorAll('.servicio');
+      
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+              } else {
+                entry.target.classList.remove('in-view');
+              }
+            });
+          }, { threshold: 0.5 }); // Umbral para considerar el elemento como visible (ajustable)
+      
+          servicios.forEach(servicio => {
+            observer.observe(servicio);
+          });
+        });
+      </script>
+      
+      <Script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search');
+    const servicios = document.querySelectorAll('.servicio');
+
+    searchInput.addEventListener('input', () => {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        servicios.forEach(servicio => {
+            const title = servicio.querySelector('h3').textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+                servicio.style.display = 'block';
+            } else {
+                servicio.style.display = 'none';
+            }
+        });
+    });
+});
+
+      </Script>
+
+
+</body>
+</html>
